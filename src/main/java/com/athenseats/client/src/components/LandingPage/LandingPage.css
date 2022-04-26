@@ -1,44 +1,88 @@
-.landing-container {
-    position: relative;
-    height: calc(100vh - 64px);
-    width: 100%;
-    top: 64px;
+.front-panel {
+    height: calc(100vh - 28vh - 6vh);
 }
 
 .restaurant-card {
     display: block;
     filter: drop-shadow(5px 5px 2px black);
-    width: 23vh;
-    min-width: 175px;
-    height: 23vh;
-    min-height: 175px;
+    width: 18vh;
+    height: 18vh;
+    min-height: 100px;
+    min-width: 100px;
     margin-bottom: 10px;
     margin-left: 10px;
 }
 
-.restaurant-card-contents{
+.card-img {
     display: inline;
-    width: 23vh;
-    height: 23vh;
+    position: relative;
+    height: 10vh;
+    width: 15vh;
+    right: 5px;
+}
+
+.restaurant-card-contents {
+    display: inline;
+    width: 18vh;
+    height: 18vh;
     float: start;
     align-content: center;
 }
 
-.card-img{
-    display: inline;
-    position: relative;
-    max-height: 19vh;
-    min-height: 120px;
-    max-width: 21vh;
-    min-width: 150px;
+
+@media (max-width: 321px) {
 }
 
-.restaurant-list{
-    margin: auto;
-    gap: 0 !important;
+
+
+@media (min-width: 768px) {
+    .landing-container {
+        position: relative;
+        height: calc(100vh - 64px);
+        width: 100%;
+        top: 64px;
+    }
+
+    .restaurant-card {
+        display: block;
+        filter: drop-shadow(5px 5px 2px black);
+        width: 23vh;
+        min-width: 175px;
+        height: 23vh;
+        min-height: 175px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+    }
+
+    .restaurant-card-contents {
+        display: inline;
+        width: 23vh;
+        height: 23vh;
+        float: start;
+        align-content: center;
+    }
+
+    .card-img {
+        display: inline;
+        position: relative;
+        max-height: 19vh;
+        min-height: 130px;
+        max-width: 21vh;
+        min-width: 160px;
+        right: 5px;
+        border-radius: 5px;
+    }
+
+    .restaurant-list {
+        margin: auto;
+        gap: 0 !important;
+    }
+
+    .front-panel {
+        height: calc(100vh - 28vh - 17vh);
+    }
+
 }
 
-.front-panel {
-    height: calc(100vh - 28vh - 80px);
-}
+
 
