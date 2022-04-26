@@ -1,0 +1,7 @@
+.MuiButton-default {
+    text-transform: none !important;
+}
+
+.account-button {
+    float: end !important;
+}

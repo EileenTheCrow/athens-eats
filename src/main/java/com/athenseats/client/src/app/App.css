@@ -1,5 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
+}
+
+body {
+  background-color: #1a1a1a;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }
 
 .App-logo {
@@ -35,4 +48,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.content-container {
+  position: relative;
+  height: calc(100vh - 64px);
+  width: 100%;
+  top: 64px;
 }
