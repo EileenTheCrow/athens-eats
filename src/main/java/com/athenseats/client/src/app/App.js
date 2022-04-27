@@ -21,7 +21,7 @@ const athensEatsTheme = createTheme({
       contrastText: '#f7f7f7',
     },
     background: {
-      default: '#272727',
+      default: '#000000',
       paper: '#ffffff',
     },
     text: {
