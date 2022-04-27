@@ -1,6 +1,6 @@
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {createTheme, ThemeProvider} from "@mui/material";
+import {createTheme, responsiveFontSizes, ThemeProvider} from "@mui/material";
 import LandingPage from "../components/LandingPage/LandingPage";
 import Restaurants from "../components/Restaurants/Restaurants";
 import Polls from "../components/Polls/Polls";
@@ -8,7 +8,8 @@ import WishList from "../components/WishList/WishList";
 import AboutUs from "../components/AboutUs/AboutUs";
 import NavBar from "../components/NavBar/NavBar";
 
-const athensEatsTheme = createTheme({
+
+let athensEatsTheme = createTheme({
   palette: {
     type: 'light',
     primary: {
@@ -25,13 +26,18 @@ const athensEatsTheme = createTheme({
       paper: '#ffffff',
     },
     text: {
-      primary: '#969696',
+      primary: '#2F2F2F',
       secondary: 'rgba(175,175,175,0.84)',
       disabled: 'rgba(226,225,225,0.37)',
       hint: 'rgba(210,206,206,0.5)',
     },
   },
+  typography: {
+    fontFamily: 'Sora'
+  }
 });
+
+athensEatsTheme = responsiveFontSizes(athensEatsTheme);
 
 function App() {
   return (

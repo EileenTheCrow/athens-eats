@@ -1,0 +1,60 @@
+.restaurant-card-t2 {
+    display: block;
+    filter: drop-shadow(5px 5px 2px black);
+    width: 80vw;
+    height: 50vh;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.card-img-t2 {
+    object-fit: contain;
+    display: block;
+    position: relative;
+    height: 30vh;
+    width: 70vw;
+    border-radius: 5px;
+    margin:auto;
+}
+
+.restaurant-card-contents-t2 {
+    display: inline;
+    width: 18vh;
+    height: 18vh;
+    float: start;
+    align-content: center;
+}
+
+.restaurant-list-t2 {
+    margin: auto;
+    gap: 0 !important;
+}
+
+.restaurant-text-t2{
+    height: max-content;
+    width: 70vw;
+    margin:auto;
+}
+
+.backdrop{
+    height: calc(100vh);
+    top: 30px !important;
+}
+
+
+@media (min-width: 769px) {
+    .restaurant-card-t2 {
+        max-width: 614px;
+    }
+
+    .card-img-t2{
+        max-width: 537.6px;
+    }
+
+    .restaurant-text-t2{
+        margin: auto;
+        width: 530px;
+    }
+
+}
