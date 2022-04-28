@@ -2,7 +2,7 @@ import { Card, CardContent, Typography, Rating } from "@mui/material";
 
 function Review(props) {
   return (
-    <Card>
+    <Card variant="outlined">
       <CardContent>
         <Typography variant="h5">{props.user}</Typography>
         <Rating

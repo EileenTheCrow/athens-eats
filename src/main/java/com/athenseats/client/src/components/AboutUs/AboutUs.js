@@ -10,8 +10,8 @@ function AboutUs() {
         style={{ backgroundImage: `url(${restaurants})` }}
       ></div>
     <div className="aboutBottom">
-       <h1>ABOUT US</h1>
-        <p> 
+       <h1 className="about-us">ABOUT US</h1>
+        <p className="about-body">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
           mollitia, molestiae quas vel sint commodi repudiandae consequuntur
           voluptatum laborum numquam blanditiis harum quisquam eius sed odit

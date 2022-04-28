@@ -14,7 +14,7 @@
 	<name>athens-eats</name>
 	<description>Backend for Athens Eats web app</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

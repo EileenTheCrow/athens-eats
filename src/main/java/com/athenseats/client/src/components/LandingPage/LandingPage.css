@@ -1,88 +1,81 @@
 .front-panel {
-    height: calc(100vh - 28vh - 6vh);
+  height: calc(100vh - 28vh - 6vh);
 }
 
 .restaurant-card {
-    display: block;
-    filter: drop-shadow(5px 5px 2px black);
-    width: 18vh;
-    height: 18vh;
-    min-height: 100px;
-    min-width: 100px;
-    margin-bottom: 10px;
-    margin-left: 10px;
+  display: block;
+  filter: drop-shadow(5px 5px 2px black);
+  width: 18vh;
+  height: 18vh;
+  min-height: 150px;
+  min-width: 150px;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .card-img {
-    display: inline;
-    position: relative;
-    height: 10vh;
-    width: 15vh;
-    right: 5px;
+  display: block;
+  position: relative;
+  object-fit: contain;
+  height: 50%;
+  width: 100%;
 }
 
 .restaurant-card-contents {
-    display: inline;
-    width: 18vh;
-    height: 18vh;
-    float: start;
-    align-content: center;
+  display: block;
+  width: 100%;
+  height: 100%;
+  float: start;
+  align-content: center;
 }
 
-
-@media (max-width: 321px) {
+@media (max-width: 376px) {
+  .restaurant-name {
+    font-size: 12px !important;
+  }
 }
-
-
 
 @media (min-width: 768px) {
-    .landing-container {
-        position: relative;
-        height: calc(100vh - 64px);
-        width: 100%;
-        top: 64px;
-    }
+  .landing-container {
+    position: relative;
+    height: calc(100vh - 64px);
+    width: 100%;
+    top: 64px;
+  }
 
-    .restaurant-card {
-        display: block;
-        filter: drop-shadow(5px 5px 2px black);
-        width: 23vh;
-        min-width: 175px;
-        height: 23vh;
-        min-height: 175px;
-        margin-bottom: 10px;
-        margin-left: 10px;
-    }
+  .restaurant-card {
+    display: block;
+    filter: drop-shadow(5px 5px 2px black);
+    width: 23vh;
+    min-width: 175px;
+    height: 23vh;
+    min-height: 175px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
 
-    .restaurant-card-contents {
-        display: inline;
-        width: 23vh;
-        height: 23vh;
-        float: start;
-        align-content: center;
-    }
+  .restaurant-card-contents {
+    display: block;
+    width: 100%;
+    height: 100%;
+    float: start;
+    align-content: center;
+  }
 
-    .card-img {
-        display: inline;
-        position: relative;
-        max-height: 19vh;
-        min-height: 130px;
-        max-width: 21vh;
-        min-width: 160px;
-        right: 5px;
-        border-radius: 5px;
-    }
+  .card-img {
+    display: block;
+    position: relative;
+    object-fit: contain;
+    height: 75%;
+    width: 100%;
+  }
 
-    .restaurant-list {
-        margin: auto;
-        gap: 0 !important;
-    }
+  .restaurant-list {
+    margin: auto;
+    gap: 0 !important;
+  }
 
-    .front-panel {
-        height: calc(100vh - 28vh - 17vh);
-    }
-
+  .front-panel {
+    height: calc(100vh - 28vh - 17vh);
+  }
 }
-
-
-
