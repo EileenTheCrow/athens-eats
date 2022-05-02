@@ -1,0 +1,36 @@
+.register-header {
+  margin: auto;
+  width: fit-content;
+}
+
+.register-card {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 80%;
+  max-width: 300px;
+  height: fit-content;
+  padding: 20px;
+}
+
+.register-card-content {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+
+.register-field {
+  margin: auto;
+  margin-bottom: 10px !important;
+}
+
+.register-button {
+  width: fit-content;
+  margin: auto;
+}
+
+.register-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}

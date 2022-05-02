@@ -6,7 +6,6 @@ import {
   CardContent,
   CardHeader,
   TextField,
-  Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -21,17 +20,9 @@ export function Login() {
   }, []);
 
   function handleLoginInfo(event) {
-    const name = event.target.name;
-    const value = event.target.value;
-    let other = "password";
-    let otherValue = login.password;
-    if (name === "password") {
-      other = "username";
-      otherValue = login.username;
-    }
     setLogin({
-      [name]: value,
-      [other]: otherValue,
+      ...login,
+      [event.currentTarget.name]: event.currentTarget.value,
     });
   }
 
@@ -40,7 +31,6 @@ export function Login() {
       username: login.username,
       password: "",
     });
-    console.log("who is calling this????");
   }
 
   return (
