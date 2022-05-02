@@ -41,8 +41,6 @@ public class User {
     this.email = email;
   }
 
-<<<<<<< HEAD
-=======
   public String getPassword() {
     return password;
   }
@@ -50,5 +48,4 @@ public class User {
   public void setPassword(String password) {
     this.password = password;
   }
->>>>>>> 4d7b0aeaad57e49fd1c21b745508bbf5ae4732e2
 }
