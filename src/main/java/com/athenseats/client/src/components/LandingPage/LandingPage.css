@@ -1,14 +1,13 @@
 .front-panel {
-  height: calc(100vh - 28vh - 6vh);
+  height: calc(100vh - 257px);
+  max-height: fit-content;
 }
 
 .restaurant-card {
   display: block;
   filter: drop-shadow(5px 5px 2px black);
-  width: 18vh;
-  height: 18vh;
-  min-height: 150px;
-  min-width: 150px;
+  height: 150px;
+  width: 150px;
   margin-bottom: 10px;
   margin-left: 10px;
 }
@@ -35,7 +34,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .landing-container {
     position: relative;
     height: calc(100vh - 64px);
@@ -46,10 +45,8 @@
   .restaurant-card {
     display: block;
     filter: drop-shadow(5px 5px 2px black);
-    width: 23vh;
-    min-width: 175px;
-    height: 23vh;
-    min-height: 175px;
+    width: 175px;
+    height: 175px;
     margin-bottom: 10px;
     margin-left: 10px;
   }
@@ -76,6 +73,6 @@
   }
 
   .front-panel {
-    height: calc(100vh - 28vh - 17vh);
+    height: calc(100vh - 270px);
   }
 }

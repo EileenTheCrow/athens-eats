@@ -5,16 +5,15 @@
   flex-direction: column;
 }
 
-.aboutTop {
+.about-top {
   width: 100%;
   height: 45%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-.aboutBottom {
+.about-bottom {
   display: flex;
   flex-direction: column;
   height: 55%;
@@ -23,12 +22,11 @@
   color: rgb(255, 255, 255);
 }
 
-.aboutBottom .about-body {
+.about-bottom .about-body {
   width: 80%;
-  margin-bottom: 20px;
 }
 
-.about .aboutBottom .about-us {
+.about .about-bottom .about-us {
   font-weight: 400;
   font-size: 70px;
   color: rgb(223, 0, 0);

@@ -1,0 +1,35 @@
+.login-header {
+  margin: auto;
+  width: fit-content;
+}
+
+.login-card {
+  display: block;
+  margin: auto;
+  width: 80%;
+  max-width: 300px;
+  height: fit-content;
+  padding: 20px;
+}
+
+.login-card-content {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+
+.login-username {
+  margin: auto;
+  margin-bottom: 10px !important;
+}
+
+.login-button {
+  width: fit-content;
+  margin: auto;
+}
+
+.login-container {
+  height: 80%;
+  display: flex;
+  justify-content: "center";
+}

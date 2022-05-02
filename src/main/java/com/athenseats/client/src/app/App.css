@@ -2,23 +2,33 @@
   box-sizing: border-box;
 }
 
-p, h1, h2, h3, h4, h5, h6, label, input, textarea, button{
-  font-family: 'Sora' !important;
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+input,
+textarea,
+button {
+  font-family: "Sora" !important;
 }
 
 ::-webkit-scrollbar {
   width: 20px;
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background: #888;
 }
 
-::-webkit-scrollbar-thumb:hover{
+::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
@@ -32,6 +42,7 @@ p, h1, h2, h3, h4, h5, h6, label, input, textarea, button{
 
 body {
   background-color: #1a1a1a;
+  margin: 0;
 }
 
 p {
@@ -74,9 +85,14 @@ p {
   }
 }
 
-.content-container {
+.content {
   position: relative;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 68.5px);
   width: 100%;
-  top: 64px;
+}
+
+@media (max-width: 601px) {
+  .content {
+    height: calc(100vh - 64px);
+  }
 }

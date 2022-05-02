@@ -135,7 +135,7 @@ export function Restaurants() {
         sx={{
           gridAutoFlow: "row",
           gridTemplateColumns:
-            "repeat(auto-fill, minmax(400px, 100%)) !important",
+            "repeat(auto-fill, minmax(100%, 100%)) !important",
           gridAutoRows: "minmax(25vh, min-content)",
         }}
       >

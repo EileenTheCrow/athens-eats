@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import React from "react";
 import restaurants from "../../assets/restaurants.jpg";
 import "./AboutUs.css";
@@ -5,13 +6,15 @@ import "./AboutUs.css";
 function AboutUs() {
   return (
     <div className="about">
-       <div
-        className="aboutTop"
+      <div
+        className="about-top"
         style={{ backgroundImage: `url(${restaurants})` }}
       ></div>
-    <div className="aboutBottom">
-       <h1 className="about-us">ABOUT US</h1>
-        <p className="about-body">
+      <div className="about-bottom">
+        <Typography variant="h2" className="about-us">
+          About Us
+        </Typography>
+        <Typography className="about-body" variant="body1">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
           mollitia, molestiae quas vel sint commodi repudiandae consequuntur
           voluptatum laborum numquam blanditiis harum quisquam eius sed odit
@@ -25,10 +28,10 @@ function AboutUs() {
           recusandae alias error harum maxime adipisci amet laborum.
           Perspiciatis minima nesciunt dolorem! Officiis iure rerum voluptates a
           cumque velit
-        </p>
+        </Typography>
+      </div>
     </div>
-    </div>
-  )
+  );
 }
 
 export default AboutUs;

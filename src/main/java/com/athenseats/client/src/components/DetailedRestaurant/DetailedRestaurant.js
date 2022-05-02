@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import Review from "../Review/Review";
 
-function DetailedRestaurant(props) {
+export function DetailedRestaurant(props) {
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0.0);
   const [userReview, setUserReview] = useState("");
