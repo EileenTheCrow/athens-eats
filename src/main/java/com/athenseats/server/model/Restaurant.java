@@ -21,7 +21,6 @@ public class Restaurant {
   @Column(name = "type", nullable = false)
   private String type;
 
-  @Lob
   @Column(name = "address", nullable = false)
   private String address;
 
@@ -45,6 +44,7 @@ public class Restaurant {
     this.type = type;
     this.address = address;
     this.restaurantImage = restaurantImage;
+    this.rating = 0;
   }
 
   public int getRestaurantId(){

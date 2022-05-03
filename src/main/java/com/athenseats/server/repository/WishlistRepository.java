@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.athenseats.server.model.Wishlist;
 
 @CrossOrigin(origins = "http://localhost:3000")
-@RepositoryRestResource(collectionResourceRel = "users", path = "users")
+@RepositoryRestResource(collectionResourceRel = "wishlists", path = "wishlists")
 public interface WishlistRepository extends JpaRepository<Wishlist, Integer> {
 }
