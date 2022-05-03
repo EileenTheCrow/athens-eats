@@ -13,7 +13,6 @@ import {
 function WishList() {
   return (
     <div className="wishlist" style={{ backgroundImage: `url(${plate})` }}>
-      <div className="left-side" />
       <div className="right-side">
         <Card className="wishlist-card" sx={{ display: "flex" }}>
           <CardHeader

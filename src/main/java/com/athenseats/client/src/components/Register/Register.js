@@ -11,12 +11,11 @@ import "./Register.css";
 
 export function Register() {
   const [register, setRegister] = useState([]);
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
     setRegister({
-      username: "",
       password: "",
-      confirmPassword: "",
       email: "",
       firstName: "",
       lastName: "",
@@ -30,10 +29,28 @@ export function Register() {
     });
   }
 
-  function handleSubmit() {
-    setRegister({
-      username: register.username,
-      password: "",
+  function handleConfirmPassword(event) {
+    setConfirmPassword(event.currentTarget.value);
+  }
+
+  async function handleSubmit() {
+    await new Promise(function (resolve, reject) {
+      fetch("http://localhost:8080/api/users/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(register),
+      })
+        .then((response) => {
+          response.json().then((json) => {
+            resolve(json);
+          });
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   }
 
@@ -46,8 +63,6 @@ export function Register() {
             className="register-field"
             name="username"
             label="Username"
-            value={register.username || ""}
-            onChange={handleRegisterInfo}
           />
           <TextField
             className="register-field"
@@ -62,8 +77,8 @@ export function Register() {
             type="password"
             name="confirmPassword"
             label="Confirm Password"
-            value={register.confirmPassword || ""}
-            onChange={handleRegisterInfo}
+            value={confirmPassword || ""}
+            onChange={handleConfirmPassword}
           />
           <TextField
             className="register-field"
