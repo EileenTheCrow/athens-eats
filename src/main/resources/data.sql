@@ -1,50 +1,3 @@
-/*
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";*/
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
-/*
-CREATE DATABASE IF NOT EXISTS athenseats_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE athenseats_db;
-
-
-CREATE TABLE IF NOT EXISTS users (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  email varchar(255) DEFAULT NULL,
-  name varchar(255) DEFAULT NULL,
-  password varchar(255) DEFAULT NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS restaurant (
-  name varchar(255) DEFAULT NULL,
-  type varchar(255) DEFAULT NULL,
-  address varchar(255) DEFAULT NULL,
-  PRIMARY KEY (name)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS review (
-  rating double(100,2) DEFAULT NULL,
-  review varchar(255) DEFAULT NULL,
-  user varchar(255) DEFAULT NULL,
-  restaurant varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS wishlist (
-  name varchar(255) DEFAULT NULL,
-  type varchar(255) DEFAULT NULL,
-  address varchar(255) DEFAULT NULL,
-  PRIMARY KEY (name)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-*/
-
-/*Spring will automatically create tables within the database, we only need inserts to populate them*/
 DELETE FROM reviews;
 DELETE FROM wishlists;
 DELETE FROM users;
@@ -52,7 +5,7 @@ DELETE FROM restaurants;
 
 INSERT INTO users (user_id, email, first_name, last_name, password) VALUES
 (1, 'test@test.com', 'testFirstName', 'testLastName', 'testPass'),
-(2, 'vmg16660@uga.com', 'Vince', 'Forgot', 'abc123');
+(2, 'vmg16660@uga.com', 'Vince', 'Grano', 'abc123');
 
 INSERT INTO restaurants (restaurant_id, name, type, address, restaurant_image) VALUES
 (1, 'The Place', 'Southern', '229 E Broad St, Athens, GA', 'https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/1628096164193-GO5NTY8XZ1MODJ00V6JV/30.jpg'),
@@ -82,7 +35,3 @@ INSERT INTO wishlists (name, type, address) VALUES
 ('Pauleys', 'American', '134 E Clayton St, Athens, GA'),
 ('JINYA', 'Ramen', '351 E Broad St, Athens, GA'),
 ('Thai Spoon', 'Thai', '149 N Lumpkin St, Athens, GA');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

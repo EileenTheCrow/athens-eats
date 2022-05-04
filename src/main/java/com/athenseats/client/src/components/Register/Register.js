@@ -33,7 +33,10 @@ export function Register() {
     setConfirmPassword(event.currentTarget.value);
   }
 
+  function validate() {}
+
   async function handleSubmit() {
+    validate();
     await new Promise(function (resolve, reject) {
       fetch("http://localhost:8080/api/users/", {
         method: "POST",
@@ -61,27 +64,6 @@ export function Register() {
         <CardContent className="register-card-content">
           <TextField
             className="register-field"
-            name="username"
-            label="Username"
-          />
-          <TextField
-            className="register-field"
-            type="password"
-            name="password"
-            label="Password"
-            value={register.password || ""}
-            onChange={handleRegisterInfo}
-          />
-          <TextField
-            className="register-field"
-            type="password"
-            name="confirmPassword"
-            label="Confirm Password"
-            value={confirmPassword || ""}
-            onChange={handleConfirmPassword}
-          />
-          <TextField
-            className="register-field"
             name="email"
             label="Email Address"
             value={register.email || ""}
@@ -95,10 +77,26 @@ export function Register() {
             onChange={handleRegisterInfo}
           />
           <TextField
+            className="register-field"
             name="lastName"
             label="Last Name"
             value={register.lastName || ""}
             onChange={handleRegisterInfo}
+          />
+          <TextField
+            className="register-field"
+            type="password"
+            name="password"
+            label="Password"
+            value={register.password || ""}
+            onChange={handleRegisterInfo}
+          />
+          <TextField
+            type="password"
+            name="confirmPassword"
+            label="Confirm Password"
+            value={confirmPassword || ""}
+            onChange={handleConfirmPassword}
           />
         </CardContent>
         <CardActions className="register-button">

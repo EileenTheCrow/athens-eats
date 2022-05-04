@@ -28,7 +28,7 @@ public class Restaurant {
   @Column(name = "restaurant_image", nullable = false)
   private String restaurantImage;
 
-  @Column(name = "rating")
+  @Column(name = "rating", columnDefinition = "double default 0")
   private double rating;
   
   @JsonBackReference
@@ -44,7 +44,6 @@ public class Restaurant {
     this.type = type;
     this.address = address;
     this.restaurantImage = restaurantImage;
-    this.rating = 0;
   }
 
   public int getRestaurantId(){

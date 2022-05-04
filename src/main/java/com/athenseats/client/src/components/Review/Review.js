@@ -4,7 +4,9 @@ function Review(props) {
   return (
     <Card variant="outlined">
       <CardContent>
-        <Typography variant="h5">{props.user}</Typography>
+        <Typography variant="h5">
+          {props.firstName} {props.lastName}
+        </Typography>
         <Rating
           name="read-only"
           value={props.rating}

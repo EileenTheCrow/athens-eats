@@ -6,6 +6,7 @@ import {
   ImageList,
   Typography,
   Dialog,
+  Rating,
 } from "@mui/material";
 import DetailedRestaurant from "../DetailedRestaurant/DetailedRestaurant";
 
@@ -14,63 +15,17 @@ export function Restaurants() {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
   useEffect(() => {
-    let info = [
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 0,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
+    fetch("http://localhost:8080/api/restaurants/", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 1,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
-      },
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 2,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
-      },
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 3,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
-      },
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 4,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
-      },
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 5,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
-      },
-    ];
-    setRestaurants(info);
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setRestaurants(data);
+      });
   }, []);
 
   function cleanEntries(address) {
@@ -88,42 +43,46 @@ export function Restaurants() {
 
   function renderRestaurants() {
     return restaurants.map((restaurant) => (
-      <>
-        <Card
-          key={restaurant.id}
-          onClick={() => handleRestaurauntClicked(restaurant)}
-          className="restaurant-card-t2"
-        >
-          <CardContent
-            variant="outlined"
-            className="restaurant-card-contents-t2"
-          >
-            <img alt="" className="card-img-t2" src={restaurant.image} />
-            <div className="restaurant-text-t2">
-              <Typography className="restaurant-name-t2">
-                {restaurant.name}
-              </Typography>
-              <Typography className="restaurant-rating-t2">
-                Rating: {restaurant.rating}
-              </Typography>
-              <Typography className="restaurant-food-type-t2">
-                Type: {restaurant.type}
-              </Typography>
-              <Typography className="restaurant-location-t2">
-                Location:{" "}
-                <a
-                  href={
-                    "https://www.google.com/maps/search/?api=1&query=" +
-                    cleanEntries(restaurant.address)
-                  }
-                >
-                  Link
-                </a>
-              </Typography>
-            </div>
-          </CardContent>
-        </Card>
-      </>
+      <Card
+        key={restaurant.restaurantId}
+        onClick={() => handleRestaurauntClicked(restaurant)}
+        className="restaurant-card-t2"
+      >
+        <CardContent variant="outlined" className="restaurant-card-contents-t2">
+          <img
+            alt=""
+            className="card-img-t2"
+            src={restaurant.restaurantImage}
+          />
+          <div className="restaurant-text-t2">
+            <Typography className="restaurant-name-t2">
+              {restaurant.name}
+            </Typography>
+            <Typography className="restaurant-rating-t2">
+              <Rating
+                name="read-only"
+                value={restaurant.rating}
+                precision={0.1}
+                readOnly
+              />
+            </Typography>
+            <Typography className="restaurant-food-type-t2">
+              Type: {restaurant.type}
+            </Typography>
+            <Typography className="restaurant-location-t2">
+              Location:{" "}
+              <a
+                href={
+                  "https://www.google.com/maps/search/?api=1&query=" +
+                  cleanEntries(restaurant.address)
+                }
+              >
+                Link
+              </a>
+            </Typography>
+          </div>
+        </CardContent>
+      </Card>
     ));
   }
 
@@ -149,8 +108,8 @@ export function Restaurants() {
           onClose={handleDialogClose}
         >
           <DetailedRestaurant
-            pk={selectedRestaurant.id}
-            image={selectedRestaurant.image}
+            pk={selectedRestaurant.restaurantId}
+            image={selectedRestaurant.restaurantImage}
             name={selectedRestaurant.name}
             rating={selectedRestaurant.rating}
             type={selectedRestaurant.type}

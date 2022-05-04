@@ -13,40 +13,21 @@ import Review from "../Review/Review";
 
 export function DetailedRestaurant(props) {
   const [reviews, setReviews] = useState([]);
-  const [rating, setRating] = useState(0.0);
   const [userReview, setUserReview] = useState("");
   const [userRating, setUserRating] = useState(0.0);
 
   useEffect(() => {
-    let reviewsInfo = [
-      {
-        user: "Robert",
-        rating: 2,
-        review: "This place was okay.",
+    fetch(`http://localhost:8080/api/reviews/getByRestaurant/${props.pk}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      {
-        user: "Jess",
-        rating: 2.5,
-        review: "This place was okay.",
-      },
-      {
-        user: "Jay",
-        rating: 3,
-        review: "This place was okay.",
-      },
-      {
-        user: "Sarah",
-        rating: 3,
-        review: "This place was okay.",
-      },
-    ];
-    setReviews(reviewsInfo);
-
-    let avg = 0;
-    let count = reviewsInfo.length;
-    avg = reviewsInfo.reduce((prevVal, curVal) => prevVal + curVal.rating, avg);
-    avg = avg / count;
-    setRating(avg);
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setReviews(data);
+      });
   }, []);
 
   function handleUserReviewChange(event) {
@@ -75,7 +56,9 @@ export function DetailedRestaurant(props) {
   function renderReviews() {
     return reviews.map((review) => (
       <Review
-        user={review.user}
+        key={review.reviewId}
+        firstName={review.user.firstName}
+        lastName={review.user.lastName}
         rating={review.rating}
         review={review.review}
       />
@@ -89,7 +72,12 @@ export function DetailedRestaurant(props) {
           <img alt="" className="card-img-t3" src={props.image} />
           <div className="restaurant-text-t3">
             <Typography className="restaurant-name-t3">{props.name}</Typography>
-            <Rating name="read-only" value={rating} precision={0.1} readOnly />
+            <Rating
+              name="read-only"
+              value={props.rating}
+              precision={0.1}
+              readOnly
+            />
             <Typography className="restaurant-food-type-t3">
               Type: {props.type}
             </Typography>

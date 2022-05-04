@@ -35,8 +35,6 @@ public class Review {
     this.review = review;
     this.user = user;
     this.restaurant = restaurant;
-    double currentRating = restaurant.getRating();
-    restaurant.setRating((currentRating+rating)/(restaurant.getReviewsCount()+1));
   }
 
   public int getReviewId(){
