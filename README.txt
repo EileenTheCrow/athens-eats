@@ -22,7 +22,15 @@ Project has been tested on:
 	os: Windows 10, MacOS
 	browsers: Chrome, FireFox
 
-This project uses react framework and java library.
+
+This Project uses the following libraries:
+React: https://reactjs.org/
+react-router-dom: https://v5.reactrouter.com/web/guides/quick-start
+Spring Boot: https://spring.io/
+bcryptjs: https://www.npmjs.com/package/bcryptjs
+validator: https://www.npmjs.com/package/validator
+
+
 All files in directories:
 	athens-eats-main/src/main/resources
 	athens-eats-main/src/main/java/com/athenseats/server
