@@ -1,4 +1,7 @@
 .front-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: calc(100vh - 257px);
   max-height: fit-content;
 }
@@ -26,6 +29,30 @@
   height: 100%;
   float: start;
   align-content: center;
+}
+
+.title-img {
+  display: block;
+  position: relative;
+  object-fit: contain;
+  height: 70%;
+  width: 60%;
+}
+
+.title-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80%;
+  width: 90%;
+  background: rgba(154, 151, 151, 0.186);
+  backdrop-filter: drop-shadow(10px 10px 10px rgb(0, 0, 0)) blur(10px)
+    opacity(40%);
+  border-radius: 10px;
+}
+
+.restaurant-name {
+  font-size: 15px !important;
 }
 
 @media (max-width: 376px) {

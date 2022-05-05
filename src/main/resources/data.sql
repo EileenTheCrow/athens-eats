@@ -31,7 +31,6 @@ INSERT INTO reviews (rating, review, user_id, restaurant_id) VALUES
 (4.0, 'My meal was Great', 1, 8),
 (3.5, 'The Food was amazing', 1, 1);
 
-INSERT INTO wishlists (name, type, address) VALUES
-('Pauleys', 'American', '134 E Clayton St, Athens, GA'),
-('JINYA', 'Ramen', '351 E Broad St, Athens, GA'),
-('Thai Spoon', 'Thai', '149 N Lumpkin St, Athens, GA');
+INSERT INTO wishlists (name, type, address, user_id) VALUES
+('Pauleys', 'American', '134 E Clayton St, Athens, GA', 1),
+('JINYA', 'Ramen', '351 E Broad St, Athens, GA', 2);

@@ -1,34 +1,62 @@
 import "./DetailedRestaurant.css";
 import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Button,
   Card,
   CardContent,
+  Collapse,
+  IconButton,
   ImageList,
   Rating,
   TextareaAutosize,
   Typography,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import Review from "../Review/Review";
 
 export function DetailedRestaurant(props) {
   const [reviews, setReviews] = useState([]);
   const [userReview, setUserReview] = useState("");
   const [userRating, setUserRating] = useState(0.0);
+  const [currentUser, setCurrentUser] = useState([]);
+  const [refetch, setRefetch] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [alert, setAlert] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/reviews/getByRestaurant/${props.pk}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `http://localhost:8080/api/reviews/getByRestaurant/${props.restaurantId}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         setReviews(data);
       });
-  }, []);
+
+    if (localStorage.getItem("userId") !== null) {
+      fetch(
+        `http://localhost:8080/api/users/${localStorage.getItem("userId")}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setCurrentUser(data);
+        });
+    }
+  }, [refetch, props.restaurantId]);
 
   function handleUserReviewChange(event) {
     setUserReview(event.target.value);
@@ -38,12 +66,35 @@ export function DetailedRestaurant(props) {
     setUserRating(event.target.value);
   }
 
-  function handleSubmitReview(event) {
-    console.log(userReview);
-    console.log(userRating);
-    console.log(
-      "once the backend is working, use api to insert this into the database."
-    );
+  async function handleSubmitReview(event) {
+    if (localStorage.getItem("userId") === null) {
+      setOpen(true);
+      setAlert("You are not logged in");
+    } else if (
+      reviews.filter((review) => review.user.userId === currentUser.userId)
+        .length !== 0
+    ) {
+      setOpen(true);
+      setAlert("You've already written a review");
+    } else {
+      const review = {
+        rating: userRating,
+        review: userReview,
+        user: currentUser,
+        restaurant: props,
+      };
+
+      await fetch("http://localhost:8080/api/reviews/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(review),
+      })
+        .then((response) => response.json())
+        .then(setRefetch(!refetch));
+    }
   }
 
   function cleanEntries(address) {
@@ -69,7 +120,7 @@ export function DetailedRestaurant(props) {
     <div className="detailed-container">
       <Card className="restaurant-card-t3">
         <CardContent variant="outlined" className="restaurant-card-contents-t3">
-          <img alt="" className="card-img-t3" src={props.image} />
+          <img alt="" className="card-img-t3" src={props.restaurantImage} />
           <div className="restaurant-text-t3">
             <Typography className="restaurant-name-t3">{props.name}</Typography>
             <Rating
@@ -113,7 +164,31 @@ export function DetailedRestaurant(props) {
             onChange={handleUserRatingChange}
           ></Rating>
           <br />
-          <Button variant="contained" onClick={handleSubmitReview}>
+          <Collapse in={open}>
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              {alert}
+            </Alert>
+          </Collapse>
+          <Button
+            disabled={open}
+            variant="contained"
+            onClick={handleSubmitReview}
+          >
             Submit
           </Button>
         </CardContent>

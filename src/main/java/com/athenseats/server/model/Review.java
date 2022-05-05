@@ -14,6 +14,7 @@ public class Review {
   @Column(name = "rating", nullable = false)
   private double rating;
 
+  @Lob
   @Column(name = "review", columnDefinition = "TEXT")
   private String review;
 

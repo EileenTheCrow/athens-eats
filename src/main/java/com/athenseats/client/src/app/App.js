@@ -8,6 +8,7 @@ import AboutUs from "../components/AboutUs/AboutUs";
 import NavBar from "../components/NavBar/NavBar";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
+import { useEffect, useState } from "react";
 
 let athensEatsTheme = createTheme({
   palette: {
@@ -40,17 +41,28 @@ let athensEatsTheme = createTheme({
 athensEatsTheme = responsiveFontSizes(athensEatsTheme);
 
 function App() {
+  const [isLoggedIn, setLoggedIn] = useState(
+    localStorage.getItem("userId") !== null
+  );
+
+  useEffect(() => {}, [isLoggedIn]);
+
   return (
     <ThemeProvider theme={athensEatsTheme}>
       <BrowserRouter>
-        <NavBar />
+        <NavBar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
         <div className="content">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/restaurants" element={<Restaurants />} />
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={
+                <Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+              }
+            />
             <Route path="/register" element={<Register />} />
           </Routes>
         </div>

@@ -8,13 +8,28 @@ import {
   TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import bcrypt from "bcryptjs";
+import { useNavigate } from "react-router-dom";
 
-export function Login() {
+export function Login(props) {
   const [login, setLogin] = useState([]);
+  const [errors, setErrors] = useState([]);
+  const [errorText, setErrorText] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     setLogin({
-      username: "",
+      email: "",
+      password: "",
+    });
+
+    setErrors({
+      email: false,
+      password: false,
+    });
+
+    setErrorText({
+      email: "",
       password: "",
     });
   }, []);
@@ -26,11 +41,42 @@ export function Login() {
     });
   }
 
-  function handleSubmit() {
-    setLogin({
-      username: login.username,
-      password: "",
-    });
+  function flagError(name, message) {
+    setErrorText((errorText) => ({
+      ...errorText,
+      [name]: message,
+    }));
+    setErrors((errors) => ({
+      ...errors,
+      [name]: true,
+    }));
+    return false;
+  }
+
+  async function handleSubmit() {
+    try {
+      const res = await fetch(
+        `http://localhost:8080/api/users/email?email=${login.email}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await res.json();
+      if (!bcrypt.compareSync(login.password, data.password)) {
+        return flagError("password", "Invalid Credentials. Try again.");
+      } else if (data.email === login.email) {
+        localStorage.setItem("userId", data.userId);
+        props.setLoggedIn(true);
+        navigate("/", { replace: true });
+      }
+    } catch (error) {
+      return flagError("password", "Invalid Credentials. Try again.");
+    }
   }
 
   return (
@@ -40,12 +86,14 @@ export function Login() {
         <CardContent className="login-card-content">
           <TextField
             className="login-username"
-            name="username"
-            label="Username"
-            value={login.username || ""}
+            name="email"
+            label="email"
+            value={login.email || ""}
             onChange={handleLoginInfo}
+            error={errors.email}
+            helperText={errorText.email}
           >
-            Username
+            Email
           </TextField>
           <br />
           <TextField

@@ -7,12 +7,24 @@ import {
   Typography,
   Dialog,
   Rating,
+  AppBar,
+  TextField,
+  InputAdornment,
+  MenuItem,
+  Button,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import DetailedRestaurant from "../DetailedRestaurant/DetailedRestaurant";
 
 export function Restaurants() {
   const [restaurants, setRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [search, setSearch] = useState({
+    name: "",
+    type: "",
+    rating: 0,
+  });
 
   useEffect(() => {
     fetch("http://localhost:8080/api/restaurants/", {
@@ -25,6 +37,7 @@ export function Restaurants() {
       .then((response) => response.json())
       .then((data) => {
         setRestaurants(data);
+        setFilteredRestaurants(data);
       });
   }, []);
 
@@ -41,8 +54,55 @@ export function Restaurants() {
 
   const handleDialogClose = () => setSelectedRestaurant(null);
 
-  function renderRestaurants() {
-    return restaurants.map((restaurant) => (
+  function handleChange(event) {
+    setSearch({
+      ...search,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleSearch() {
+    let result = restaurants.filter((restaurant) => {
+      if (search.name.length > 0) {
+        if (restaurant.name === search.name) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    });
+
+    result = result.filter((restaurant) => {
+      if (search.type.length > 0) {
+        if (restaurant.type === search.type) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    });
+
+    result = result.filter((restaurant) => {
+      if (search.rating !== 0) {
+        if (restaurant.rating > search.rating) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    });
+
+    setFilteredRestaurants(result);
+  }
+
+  function renderRestaurants(these) {
+    return these.map((restaurant) => (
       <Card
         key={restaurant.restaurantId}
         onClick={() => handleRestaurauntClicked(restaurant)}
@@ -86,8 +146,78 @@ export function Restaurants() {
     ));
   }
 
+  function renderTypes() {
+    let types = [];
+    return restaurants
+      .filter((restaurant) => {
+        let decider = !types.includes(restaurant.type);
+        types.push(restaurant.type);
+        return decider;
+      })
+      .map((restaurant) => (
+        <MenuItem key={restaurant.type} name="type" value={restaurant.type}>
+          {restaurant.type}
+        </MenuItem>
+      ));
+  }
+
   return (
-    <>
+    <div className="restaurant-container">
+      <AppBar
+        position="static"
+        color="background"
+        sx={{
+          top: { md: 72, sm: 69, xs: 60 },
+          width: "90%",
+          borderRadius: 2,
+          flexDirection: "row",
+        }}
+      >
+        <TextField
+          variant="outlined"
+          color="primary"
+          sx={{ width: "40%", display: "flex", marginRight: 1 }}
+          name="name"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          value={search.name || ""}
+          onChange={handleChange}
+        >
+          Search
+        </TextField>
+        <TextField
+          select
+          label="Type"
+          sx={{ width: "20%", marginRight: 1 }}
+          name="type"
+          value={search.type || ""}
+          onChange={handleChange}
+        >
+          {renderTypes()}
+        </TextField>
+        <TextField
+          select
+          label="Min Rating"
+          sx={{ width: "20%", marginRight: 1 }}
+          name="rating"
+          value={search.rating || ""}
+          onChange={handleChange}
+        >
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={1}>1</MenuItem>
+        </TextField>
+        <Button variant="contained" onClick={handleSearch}>
+          Go
+        </Button>
+      </AppBar>
       <ImageList
         className="restaurant-list-t2"
         variant="outlined"
@@ -98,7 +228,7 @@ export function Restaurants() {
           gridAutoRows: "minmax(25vh, min-content)",
         }}
       >
-        {renderRestaurants()}
+        {renderRestaurants(filteredRestaurants)}
       </ImageList>
       {selectedRestaurant && (
         <Dialog
@@ -108,8 +238,8 @@ export function Restaurants() {
           onClose={handleDialogClose}
         >
           <DetailedRestaurant
-            pk={selectedRestaurant.restaurantId}
-            image={selectedRestaurant.restaurantImage}
+            restaurantId={selectedRestaurant.restaurantId}
+            restaurantImage={selectedRestaurant.restaurantImage}
             name={selectedRestaurant.name}
             rating={selectedRestaurant.rating}
             type={selectedRestaurant.type}
@@ -117,7 +247,7 @@ export function Restaurants() {
           />
         </Dialog>
       )}
-    </>
+    </div>
   );
 }
 

@@ -1,11 +1,6 @@
 package com.athenseats.server.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "wishlists")
@@ -27,15 +22,20 @@ public class Wishlist {
   @Column(name = "comment", columnDefinition = "TEXT")
   private String comment;
 
+  @OneToOne
+  @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "FK_wishlist_user"))
+  private User user;
+
   public Wishlist(){
 
   }
 
-  public Wishlist(String name, String type, String address, String comment){
+  public Wishlist(String name, String type, String address, String comment, User user){
     this.name = name;
     this.type = type;
     this.address = address;
     this.comment = comment;
+    this.user = user;
   }
 
   public int getWishlistId(){
@@ -68,5 +68,9 @@ public class Wishlist {
 
   public String getComment(){
     return comment;
+  }
+
+  public User getUser(){
+    return user;
   }
 }

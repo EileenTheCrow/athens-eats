@@ -1,75 +1,33 @@
 import "./LandingPage.css";
 import React, { createRef, useEffect, useState } from "react";
 import {
+  Button,
   Card,
   CardContent,
   ImageList,
   Rating,
   Typography,
 } from "@mui/material";
+import bulldog from "../../assets/bulldog.png";
+import { useNavigate } from "react-router-dom";
 
 export function LandingPage() {
   const [restaurants, setRestaurants] = useState([]);
   const featuredList = createRef();
+  let navigate = useNavigate();
 
   useEffect(() => {
-    let info = [
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 0,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
+    fetch("http://localhost:8080/api/restaurants/", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 1,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
-      },
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 2,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
-      },
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 3,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
-      },
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 4,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
-      },
-      {
-        name: "The Place",
-        image:
-          "https://images.squarespace-cdn.com/content/v1/60f1a66e2f550d47d6487a3c/ebe21f7e-2bd3-4999-a6de-9208560cd3cf/the-place_logo_no-border_Red.png",
-        rating: 5,
-        id: 5,
-        address: "229 E Broad St, Athens, GA 30608",
-        type: "Southern",
-      },
-    ];
-    setRestaurants(info);
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setRestaurants(data);
+      });
   }, []);
 
   function handleScroll(e) {
@@ -78,11 +36,15 @@ export function LandingPage() {
     element.scrollBy({ left: offset, top: 0, behavior: "smooth" });
   }
 
+  function handleClick() {
+    navigate("/restaurants", { replace: true });
+  }
+
   function renderRestaurants() {
     return restaurants.map((restaurant) => (
-      <Card key={restaurant.id} className="restaurant-card">
+      <Card key={restaurant.restaurantId} className="restaurant-card">
         <CardContent variant="outlined" className="restaurant-card-contents">
-          <img alt="" className="card-img" src={restaurant.image} />
+          <img alt="" className="card-img" src={restaurant.restaurantImage} />
           <Typography className="restaurant-name">{restaurant.name}</Typography>
           <Rating
             name="read-only"
@@ -97,7 +59,21 @@ export function LandingPage() {
 
   return (
     <>
-      <div className="front-panel"></div>
+      <div className="front-panel">
+        <div className="title-card">
+          <img alt="" className="title-img" src={bulldog} />
+          <Typography
+            sx={{ height: "fit-content", width: "fit-content" }}
+            variant="h3"
+            color="white"
+          >
+            Check out some restaurants nearby!
+          </Typography>
+          <Button variant="contained" onClick={handleClick}>
+            Restaurants
+          </Button>
+        </div>
+      </div>
       <ImageList
         ref={featuredList}
         onWheel={(e) => handleScroll(e)}
